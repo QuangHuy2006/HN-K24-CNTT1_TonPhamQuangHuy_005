@@ -168,8 +168,7 @@ delimiter $$
 		select sum(p.amount)
         from Enrollments e
         join Payments p on p.enroll_id = e.enroll_id
-        where e.course_id = p_course_id
-        group by e.enroll_id;
+        where e.course_id = p_course_id;
         set p_total_revenue = sum(p.amount);
     end;
 call sp_get_course_revenue(1, @kq);
