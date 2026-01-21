@@ -164,7 +164,7 @@ end;
 delimiter $$
 	create procedure sp_get_course_revenue (p_course_id int, out p_total_revenue decimal(10,2))
     begin
-    set p_total_revenue = 0;
+    if(p_course_id not in (select course_id from enrollments)) then set p_total_revenue = 0; end if;
 		select sum(p.amount)
         from Enrollments e
         join Payments p on p.enroll_id = e.enroll_id
